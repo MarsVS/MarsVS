@@ -265,7 +265,7 @@
             margin-bottom: 2rem;
         }
 
-        input, textarea, select {
+        input[type="text"], input[type="email"], textarea, select {
             width: 100%;
             background: transparent;
             border: none;
@@ -297,6 +297,87 @@
         input:focus, textarea:focus, select:focus {
             border-bottom: 1px solid var(--secondary);
             box-shadow: 0 1px 0 var(--secondary);
+        }
+
+        /* --- NEW CHECKBOX STYLES --- */
+        .checkbox-container {
+            margin-bottom: 2rem;
+        }
+        
+        .checkbox-heading {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .cyber-checkbox {
+            display: block;
+            position: relative;
+            padding-left: 35px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            font-size: 1rem;
+            color: var(--pearl);
+            font-family: var(--font-body);
+            user-select: none;
+        }
+
+        /* Hide the browser's default checkbox */
+        .cyber-checkbox input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+            height: 0;
+            width: 0;
+        }
+
+        /* Create a custom checkbox */
+        .checkmark {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 20px;
+            width: 20px;
+            background-color: transparent;
+            border: 1px solid var(--glass-border);
+            transition: 0.3s;
+        }
+
+        /* On mouse-over, add a grey background color */
+        .cyber-checkbox:hover input ~ .checkmark {
+            border-color: var(--secondary);
+            box-shadow: 0 0 5px var(--secondary);
+        }
+
+        /* When the checkbox is checked, add a blue background */
+        .cyber-checkbox input:checked ~ .checkmark {
+            background-color: var(--secondary);
+            border-color: var(--secondary);
+            box-shadow: 0 0 10px var(--secondary);
+        }
+
+        /* Create the checkmark/indicator (hidden when not checked) */
+        .checkmark:after {
+            content: "";
+            position: absolute;
+            display: none;
+        }
+
+        /* Show the checkmark when checked */
+        .cyber-checkbox input:checked ~ .checkmark:after {
+            display: block;
+        }
+
+        /* Style the checkmark/indicator */
+        .cyber-checkbox .checkmark:after {
+            left: 7px;
+            top: 3px;
+            width: 5px;
+            height: 10px;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
         }
 
         /* Chip Interface Specifics */
@@ -397,14 +478,24 @@
                     <input type="text" required>
                     <label>Pet Designation</label>
                 </div>
-                <div class="input-group">
-                    <select required style="color: var(--pearl);">
-                        <option value="" disabled selected></option>
-                        <option value="implant">Subdermal Implant</option>
-                        <option value="tag">External Bio-Tag</option>
-                        <option value="scan">Update Existing Record</option>
-                    </select>
-                    <label>Service Type</label>
+                
+                <div class="checkbox-container">
+                    <span class="checkbox-heading">Service Type (Select all that apply)</span>
+                    
+                    <label class="cyber-checkbox">Subdermal Implant
+                        <input type="checkbox" name="service" value="implant">
+                        <span class="checkmark"></span>
+                    </label>
+                    
+                    <label class="cyber-checkbox">External Bio-Tag
+                        <input type="checkbox" name="service" value="tag">
+                        <span class="checkmark"></span>
+                    </label>
+                    
+                    <label class="cyber-checkbox">Update Existing Record
+                        <input type="checkbox" name="service" value="scan">
+                        <span class="checkmark"></span>
+                    </label>
                 </div>
                 <button type="submit" class="cta-btn" style="width: 100%;">Initiate Sequence</button>
             </form>
