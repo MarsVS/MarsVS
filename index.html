@@ -278,16 +278,18 @@
             outline: none;
         }
 
-        label {
+        /* Generic label style for text inputs */
+        .input-group label {
             position: absolute;
             top: 10px;
             left: 0;
             color: var(--text-muted);
-            pointer-events: none;
+            pointer-events: none; /* Prevents clicking on text labels */
             transition: 0.3s;
             font-size: 0.9rem;
         }
 
+        /* Floating label logic */
         input:focus ~ label, input:valid ~ label, textarea:focus ~ label, textarea:valid ~ label, select:valid ~ label {
             top: -20px;
             font-size: 0.7rem;
@@ -299,7 +301,7 @@
             box-shadow: 0 1px 0 var(--secondary);
         }
 
-        /* --- NEW CHECKBOX STYLES --- */
+        /* --- CHECKBOX STYLES (FIXED) --- */
         .checkbox-container {
             margin-bottom: 2rem;
         }
@@ -313,7 +315,7 @@
 
         .cyber-checkbox {
             display: block;
-            position: relative;
+            position: relative; /* Override absolute from generic label */
             padding-left: 35px;
             margin-bottom: 12px;
             cursor: pointer;
@@ -321,6 +323,9 @@
             color: var(--pearl);
             font-family: var(--font-body);
             user-select: none;
+            pointer-events: auto; /* CRITICAL FIX: Enables clicking */
+            top: auto; /* Reset top */
+            left: auto; /* Reset left */
         }
 
         /* Hide the browser's default checkbox */
@@ -497,6 +502,7 @@
                         <span class="checkmark"></span>
                     </label>
                 </div>
+                
                 <button type="submit" class="cta-btn" style="width: 100%;">Initiate Sequence</button>
             </form>
         </div>
