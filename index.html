@@ -178,4 +178,121 @@ footer{text-align:center;color:#666;font-size:.8rem;padding:2rem}
 
 <div class="container">
 
-<!--
+<!-- ADOPTION -->
+<section>
+<h3 class="section-title">Pets for Adoption</h3>
+<div class="adoption-grid" id="card-container"></div>
+</section>
+
+<!-- MICROCHIPPING -->
+<section>
+<h3 class="section-title">Microchipping</h3>
+<p style="color:#aaa;margin-bottom:2rem">
+Microchipping is a safe, permanent identification method that significantly increases the
+chance of reuniting lost pets with their owners. Choose one or more identification options below.
+</p>
+
+<div class="tech-panel">
+<label>Pet Name</label>
+<input type="text" placeholder="e.g. Coco">
+
+<label>Microchipping Options</label>
+<div class="dropdown" id="chipDropdown">
+    <div class="dropdown-toggle">
+        Select options
+        <span>▾</span>
+    </div>
+    <div class="dropdown-menu">
+        <label><input type="checkbox"> Embedded Microchip</label>
+        <label><input type="checkbox"> External QR Biotag</label>
+        <label><input type="checkbox"> Lifetime Database Registration</label>
+    </div>
+</div>
+
+<button class="btn-submit">Save Selection</button>
+</div>
+</section>
+
+<!-- CAREERS -->
+<section>
+<h3 class="section-title">Join Our Team</h3>
+<div class="tech-panel">
+<form>
+<label>Full Name</label>
+<input type="text">
+
+<label>Email</label>
+<input type="email">
+
+<label>Phone</label>
+<input type="text">
+
+<label>Position</label>
+<select>
+<option>Veterinarian</option>
+<option>Veterinary Nurse</option>
+<option>Animal Handler</option>
+<option>Receptionist</option>
+<option>Intern</option>
+</select>
+
+<label>Upload CV</label>
+<input type="file">
+
+<label>Cover Message</label>
+<textarea rows="4"></textarea>
+
+<button class="btn-submit">Submit Application</button>
+</form>
+</div>
+</section>
+
+</div>
+
+<footer>© 2025 Mars Veterinary Services</footer>
+
+<script>
+/* PET DATA */
+const pets=[
+{id:'001',name:'Bella',type:'Dog',trait:'Friendly',img:'https://images.unsplash.com/photo-1558788353-f76d92427f16?auto=format&fit=crop&w=800&q=80'},
+{id:'002',name:'Luna',type:'Cat',trait:'Playful',img:'https://images.unsplash.com/photo-1518791841217-8f162f1e1131?auto=format&fit=crop&w=800&q=80'},
+{id:'003',name:'Charlie',type:'Rabbit',trait:'Calm',img:'https://images.unsplash.com/photo-1548767797-d8c844163c4c?auto=format&fit=crop&w=800&q=80'},
+{id:'004',name:'Max',type:'Dog',trait:'Loyal',img:'https://images.unsplash.com/photo-1517423440428-a5a00ad493e8?auto=format&fit=crop&w=800&q=80'},
+{id:'005',name:'Coco',type:'Parrot',trait:'Talkative',img:'https://images.unsplash.com/photo-1501706362039-c6e80948b3cf?auto=format&fit=crop&w=800&q=80'},
+{id:'006',name:'Rocky',type:'Hamster',trait:'Active',img:'https://images.unsplash.com/photo-1620912189865-93e9aefc9e3a?auto=format&fit=crop&w=800&q=80'}
+];
+
+const container=document.getElementById('card-container');
+pets.forEach(p=>{
+const c=document.createElement('div');
+c.className='tilt-card';
+c.style.background=`url(${p.img}) center/cover no-repeat`;
+c.innerHTML=`
+<div class="card-content">
+<div class="pet-id">ID: ${p.id}</div>
+<div class="pet-name">${p.name}</div>
+<div class="pet-stats">${p.type} • ${p.trait}</div>
+</div>`;
+container.appendChild(c);
+});
+
+/* 3D tilt desktop only */
+if(window.innerWidth>768){
+document.querySelectorAll('.tilt-card').forEach(card=>{
+card.addEventListener('mousemove',e=>{
+const r=card.getBoundingClientRect();
+const x=e.clientX-r.left;
+const y=e.clientY-r.top;
+card.style.transform=`rotateX(${-(y-r.height/2)/15}deg) rotateY(${(x-r.width/2)/15}deg)`;
+});
+card.addEventListener('mouseleave',()=>card.style.transform='rotateX(0) rotateY(0)');
+});
+}
+
+/* DROPDOWN */
+const dd=document.getElementById('chipDropdown');
+dd.querySelector('.dropdown-toggle').onclick=()=>dd.classList.toggle('open');
+</script>
+
+</body>
+</html>
