@@ -13,25 +13,14 @@
             --mars-orange: #ff9f43;
             --neon-cyan: #00d2d3;
             --deep-space: #0b0c10;
-            --glass-bg: rgba(255, 255, 255, 0.05);
-            --glass-border: rgba(255, 255, 255, 0.1);
-            --text-glow: 0 0 10px rgba(255, 77, 77, 0.7);
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
-            background-color: var(--deep-space);
-            background-image: 
-                radial-gradient(circle at 10% 20%, rgba(255, 77, 77, 0.1) 0%, transparent 20%),
-                radial-gradient(circle at 90% 80%, rgba(0, 210, 211, 0.05) 0%, transparent 20%);
+            background: var(--deep-space);
             color: #fff;
             font-family: 'Rajdhani', sans-serif;
-            overflow-x: hidden;
             line-height: 1.6;
         }
 
@@ -47,16 +36,13 @@
             padding: 2rem;
         }
 
-        section {
-            margin-bottom: 6rem;
-        }
+        section { margin-bottom: 6rem; }
 
         .section-title {
             font-size: clamp(1.8rem, 4vw, 2.5rem);
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
             border-left: 5px solid var(--mars-red);
             padding-left: 1rem;
-            text-shadow: var(--text-glow);
         }
 
         header {
@@ -73,13 +59,7 @@
             margin-bottom: 1rem;
         }
 
-        .hero-text {
-            max-width: 700px;
-            margin: auto;
-            color: #ccc;
-        }
-
-        /* --- Adoption Cards --- */
+        /* Adoption cards */
 
         .adoption-grid {
             display: grid;
@@ -89,22 +69,20 @@
         }
 
         .tilt-card {
-            position: relative;
-            height: 360px;
-            border-radius: 15px;
+            height: 380px;
+            border-radius: 16px;
             overflow: hidden;
+            position: relative;
             transform-style: preserve-3d;
             transition: transform 0.1s ease;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
-            cursor: pointer;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.7);
         }
 
         .tilt-card::after {
             content: "";
             position: absolute;
             inset: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0.2));
-            z-index: 1;
+            background: linear-gradient(to top, rgba(0,0,0,0.85), rgba(0,0,0,0.25));
         }
 
         .card-content {
@@ -115,42 +93,29 @@
             transform: translateZ(40px);
         }
 
-        .pet-id {
-            color: var(--neon-cyan);
-            font-size: 0.85rem;
-        }
+        .pet-id { color: var(--neon-cyan); font-size: 0.85rem; }
+        .pet-name { font-size: 2rem; margin: 0.3rem 0; }
+        .pet-stats { color: #ccc; font-size: 0.9rem; }
 
-        .pet-name {
-            font-size: 2rem;
-            margin: 0.3rem 0;
-        }
-
-        .pet-stats {
-            font-size: 0.9rem;
-            color: #ccc;
-            display: flex;
-            gap: 0.5rem;
-        }
-
-        /* --- Panels --- */
+        /* Panels */
 
         .tech-panel {
-            background: rgba(20, 20, 25, 0.8);
+            background: rgba(20, 20, 25, 0.85);
             border: 1px solid var(--neon-cyan);
             padding: 2.5rem;
-            border-radius: 10px;
+            border-radius: 12px;
         }
 
         label {
             color: var(--mars-orange);
             display: block;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.4rem;
         }
 
         input, textarea, select {
             width: 100%;
             padding: 1rem;
-            background: rgba(0,0,0,0.3);
+            background: rgba(0,0,0,0.35);
             border: 1px solid #333;
             color: #fff;
             margin-bottom: 1.5rem;
@@ -168,7 +133,6 @@
             align-items: center;
             padding: 1rem;
             background: rgba(255,255,255,0.05);
-            cursor: pointer;
         }
 
         .btn-submit {
@@ -177,8 +141,8 @@
             border: 2px solid var(--neon-cyan);
             background: transparent;
             color: var(--neon-cyan);
-            cursor: pointer;
             font-family: 'Orbitron';
+            cursor: pointer;
         }
 
         footer {
@@ -196,9 +160,9 @@
     <div class="container">
         <h1 class="logo">MVS</h1>
         <h2>Mars Veterinary Services</h2>
-        <p class="hero-text">
-            Professional veterinary care including adoption services, secure microchipping,
-            and opportunities to join our growing team.
+        <p style="color:#ccc; max-width:700px; margin:auto;">
+            Professional veterinary care including adoption services,
+            permanent microchipping, and career opportunities.
         </p>
     </div>
 </header>
@@ -212,53 +176,81 @@
     </section>
 
     <!-- Microchipping -->
-    <section id="microchipping">
+    <section>
         <h3 class="section-title">Microchipping</h3>
-
         <p style="color:#aaa; margin-bottom:2rem;">
-            Microchipping provides a permanent and reliable method of identifying your pet if they
-            ever get lost. A small, safe chip is placed under the skin and contains a unique ID
-            number linked to your contact details. This greatly increases the chances of reunification
-            and offers peace of mind for responsible pet owners.
+            Microchipping is a safe and permanent form of identification that helps reunite lost pets
+            with their owners. A tiny chip is placed under the skin and stores a unique ID number
+            linked to your contact details. It greatly improves recovery chances and provides lifelong peace of mind.
         </p>
 
         <div class="tech-panel">
+            <label>Pet Name</label>
+            <input type="text" placeholder="e.g. Luna">
+
+            <label>Select Option</label>
+            <div class="chip-options">
+                <label class="radio-wrapper"><input type="radio" name="chip" checked> Embedded Chip</label>
+                <label class="radio-wrapper"><input type="radio" name="chip"> External QR Biotag</label>
+                <label class="radio-wrapper"><input type="radio" name="chip"> Both</label>
+            </div>
+
+            <button class="btn-submit">Submit</button>
+        </div>
+    </section>
+
+    <!-- Careers / Job Application -->
+    <section>
+        <h3 class="section-title">Join Our Team</h3>
+
+        <div class="tech-panel">
+            <p style="color:#aaa; margin-bottom:2rem;">
+                We are always looking for passionate professionals who care deeply about animal welfare.
+                Fill in the form below to apply.
+            </p>
+
             <form>
-                <label>Pet Name</label>
-                <input type="text" placeholder="e.g. Max">
+                <label>Full Name</label>
+                <input type="text" placeholder="Your full name">
 
-                <label>Select Option</label>
-                <div class="chip-options">
-                    <label class="radio-wrapper">
-                        <input type="radio" name="chip" checked> Embedded Chip
-                    </label>
-                    <label class="radio-wrapper">
-                        <input type="radio" name="chip"> External QR Biotag
-                    </label>
-                    <label class="radio-wrapper">
-                        <input type="radio" name="chip"> Both (Embedded + QR)
-                    </label>
-                </div>
+                <label>Email Address</label>
+                <input type="email" placeholder="email@example.com">
 
-                <button class="btn-submit" type="button">Submit</button>
+                <label>Phone Number</label>
+                <input type="text" placeholder="+254...">
+
+                <label>Position Applying For</label>
+                <select>
+                    <option>Veterinarian</option>
+                    <option>Veterinary Nurse</option>
+                    <option>Animal Handler</option>
+                    <option>Receptionist</option>
+                    <option>Intern</option>
+                </select>
+
+                <label>Upload CV</label>
+                <input type="file">
+
+                <label>Short Cover Message</label>
+                <textarea rows="4" placeholder="Tell us why you'd like to join Mars Veterinary Services"></textarea>
+
+                <button class="btn-submit">Submit Application</button>
             </form>
         </div>
     </section>
 
 </div>
 
-<footer>
-    © 2025 Mars Veterinary Services
-</footer>
+<footer>© 2025 Mars Veterinary Services</footer>
 
 <script>
     const pets = [
-        { id: '001', name: 'Bella', type: 'Dog', trait: 'Friendly', img: 'https://picsum.photos/600/800?random=1' },
-        { id: '002', name: 'Luna', type: 'Cat', trait: 'Playful', img: 'https://picsum.photos/600/800?random=2' },
-        { id: '003', name: 'Charlie', type: 'Rabbit', trait: 'Calm', img: 'https://picsum.photos/600/800?random=3' },
-        { id: '004', name: 'Max', type: 'Dog', trait: 'Loyal', img: 'https://picsum.photos/600/800?random=4' },
-        { id: '005', name: 'Coco', type: 'Parrot', trait: 'Talkative', img: 'https://picsum.photos/600/800?random=5' },
-        { id: '006', name: 'Rocky', type: 'Hamster', trait: 'Active', img: 'https://picsum.photos/600/800?random=6' }
+        { id:'001', name:'Bella', type:'Dog', trait:'Friendly', img:'https://images.unsplash.com/photo-1558788353-f76d92427f16' },
+        { id:'002', name:'Luna', type:'Cat', trait:'Playful', img:'https://images.unsplash.com/photo-1518791841217-8f162f1e1131' },
+        { id:'003', name:'Charlie', type:'Rabbit', trait:'Calm', img:'https://images.unsplash.com/photo-1548767797-d8c844163c4c' },
+        { id:'004', name:'Max', type:'Dog', trait:'Loyal', img:'https://images.unsplash.com/photo-1517423440428-a5a00ad493e8' },
+        { id:'005', name:'Coco', type:'Parrot', trait:'Talkative', img:'https://images.unsplash.com/photo-1501706362039-c6e80948b3cf' },
+        { id:'006', name:'Rocky', type:'Hamster', trait:'Active', img:'https://images.unsplash.com/photo-1620912189865-93e9aefc9e3a' }
     ];
 
     const container = document.getElementById('card-container');
@@ -267,14 +259,11 @@
         const card = document.createElement('div');
         card.className = 'tilt-card';
         card.style.background = `url(${pet.img}) center/cover no-repeat`;
-
         card.innerHTML = `
             <div class="card-content">
                 <div class="pet-id">ID: ${pet.id}</div>
                 <div class="pet-name">${pet.name}</div>
-                <div class="pet-stats">
-                    <span>${pet.type}</span> • <span>${pet.trait}</span>
-                </div>
+                <div class="pet-stats">${pet.type} • ${pet.trait}</div>
             </div>
         `;
         container.appendChild(card);
@@ -286,7 +275,8 @@
                 const r = card.getBoundingClientRect();
                 const x = e.clientX - r.left;
                 const y = e.clientY - r.top;
-                card.style.transform = `rotateX(${-(y - r.height/2)/15}deg) rotateY(${(x - r.width/2)/15}deg)`;
+                card.style.transform =
+                    `rotateX(${-(y - r.height/2)/15}deg) rotateY(${(x - r.width/2)/15}deg)`;
             });
             card.addEventListener('mouseleave', () => {
                 card.style.transform = 'rotateX(0) rotateY(0)';
