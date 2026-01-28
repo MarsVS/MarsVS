@@ -1,157 +1,166 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mars Veterinary Services</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mars Veterinary Services</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
 
-    <style>
-        :root {
-            --mars-red: #ff4d4d;
-            --mars-orange: #ff9f43;
-            --neon-cyan: #00d2d3;
-            --deep-space: #0b0c10;
-        }
+<style>
+:root{
+    --mars-red:#ff4d4d;
+    --mars-orange:#ff9f43;
+    --neon-cyan:#00d2d3;
+    --deep-space:#0b0c10;
+}
 
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+*{box-sizing:border-box;margin:0;padding:0}
 
-        body {
-            background: var(--deep-space);
-            color: #fff;
-            font-family: 'Rajdhani', sans-serif;
-            line-height: 1.6;
-        }
+body{
+    background:var(--deep-space);
+    color:#fff;
+    font-family:'Rajdhani',sans-serif;
+    line-height:1.6;
+}
 
-        h1, h2, h3 {
-            font-family: 'Orbitron', sans-serif;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
+h1,h2,h3{
+    font-family:'Orbitron',sans-serif;
+    text-transform:uppercase;
+    letter-spacing:2px;
+}
 
-        .container {
-            max-width: 1200px;
-            margin: auto;
-            padding: 2rem;
-        }
+.container{
+    max-width:1200px;
+    margin:auto;
+    padding:clamp(1rem,4vw,2rem);
+}
 
-        section { margin-bottom: 6rem; }
+section{margin-bottom:5rem}
 
-        .section-title {
-            font-size: clamp(1.8rem, 4vw, 2.5rem);
-            margin-bottom: 1.5rem;
-            border-left: 5px solid var(--mars-red);
-            padding-left: 1rem;
-        }
+.section-title{
+    font-size:clamp(1.6rem,4vw,2.4rem);
+    margin-bottom:1.2rem;
+    border-left:5px solid var(--mars-red);
+    padding-left:1rem;
+}
 
-        header {
-            text-align: center;
-            padding: 4rem 1rem;
-        }
+/* HEADER */
+header{text-align:center;padding:4rem 1rem}
+.logo{
+    font-size:3rem;
+    color:var(--mars-red);
+    border:2px solid var(--mars-red);
+    padding:.5rem 1.5rem;
+    display:inline-block;
+    margin-bottom:1rem;
+}
 
-        .logo {
-            font-size: 3rem;
-            color: var(--mars-red);
-            border: 2px solid var(--mars-red);
-            padding: 0.5rem 1.5rem;
-            display: inline-block;
-            margin-bottom: 1rem;
-        }
+/* ADOPTION CARDS */
+.adoption-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:2rem;
+    perspective:1000px;
+}
 
-        /* Adoption cards */
+.tilt-card{
+    height:380px;
+    border-radius:16px;
+    overflow:hidden;
+    position:relative;
+    box-shadow:0 15px 40px rgba(0,0,0,.7);
+    transition:transform .1s ease;
+}
 
-        .adoption-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            perspective: 1000px;
-        }
+.tilt-card::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(to top,rgba(0,0,0,.85),rgba(0,0,0,.25));
+}
 
-        .tilt-card {
-            height: 380px;
-            border-radius: 16px;
-            overflow: hidden;
-            position: relative;
-            transform-style: preserve-3d;
-            transition: transform 0.1s ease;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.7);
-        }
+.card-content{
+    position:absolute;
+    bottom:0;
+    padding:1.5rem;
+    z-index:2;
+}
 
-        .tilt-card::after {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.85), rgba(0,0,0,0.25));
-        }
+.pet-id{color:var(--neon-cyan);font-size:.85rem}
+.pet-name{font-size:2rem;margin:.2rem 0}
+.pet-stats{color:#ccc;font-size:.9rem}
 
-        .card-content {
-            position: absolute;
-            bottom: 0;
-            padding: 1.5rem;
-            z-index: 2;
-            transform: translateZ(40px);
-        }
+/* PANELS */
+.tech-panel{
+    background:rgba(20,20,25,.85);
+    border:1px solid var(--neon-cyan);
+    padding:clamp(1.5rem,4vw,2.5rem);
+    border-radius:12px;
+}
 
-        .pet-id { color: var(--neon-cyan); font-size: 0.85rem; }
-        .pet-name { font-size: 2rem; margin: 0.3rem 0; }
-        .pet-stats { color: #ccc; font-size: 0.9rem; }
+label{color:var(--mars-orange);display:block;margin-bottom:.4rem}
+input,textarea,select{
+    width:100%;
+    padding:1rem;
+    background:rgba(0,0,0,.35);
+    border:1px solid #333;
+    color:#fff;
+    margin-bottom:1.4rem;
+    border-radius:4px;
+}
 
-        /* Panels */
+/* DROPDOWN CHECKLIST */
+.dropdown{
+    position:relative;
+}
+.dropdown-toggle{
+    background:rgba(0,0,0,.4);
+    border:1px solid #333;
+    padding:1rem;
+    cursor:pointer;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+.dropdown-menu{
+    display:none;
+    position:absolute;
+    width:100%;
+    background:#121318;
+    border:1px solid var(--neon-cyan);
+    margin-top:.3rem;
+    z-index:5;
+}
+.dropdown-menu label{
+    display:flex;
+    gap:.7rem;
+    padding:.8rem 1rem;
+    cursor:pointer;
+    color:#ddd;
+}
+.dropdown-menu label:hover{
+    background:rgba(255,255,255,.05);
+}
+.dropdown.open .dropdown-menu{display:block}
 
-        .tech-panel {
-            background: rgba(20, 20, 25, 0.85);
-            border: 1px solid var(--neon-cyan);
-            padding: 2.5rem;
-            border-radius: 12px;
-        }
+.btn-submit{
+    width:100%;
+    padding:1rem;
+    border:2px solid var(--neon-cyan);
+    background:transparent;
+    color:var(--neon-cyan);
+    font-family:'Orbitron';
+    cursor:pointer;
+}
 
-        label {
-            color: var(--mars-orange);
-            display: block;
-            margin-bottom: 0.4rem;
-        }
+footer{text-align:center;color:#666;font-size:.8rem;padding:2rem}
 
-        input, textarea, select {
-            width: 100%;
-            padding: 1rem;
-            background: rgba(0,0,0,0.35);
-            border: 1px solid #333;
-            color: #fff;
-            margin-bottom: 1.5rem;
-        }
-
-        .chip-options {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .radio-wrapper {
-            display: flex;
-            gap: 1rem;
-            align-items: center;
-            padding: 1rem;
-            background: rgba(255,255,255,0.05);
-        }
-
-        .btn-submit {
-            width: 100%;
-            padding: 1rem;
-            border: 2px solid var(--neon-cyan);
-            background: transparent;
-            color: var(--neon-cyan);
-            font-family: 'Orbitron';
-            cursor: pointer;
-        }
-
-        footer {
-            text-align: center;
-            color: #666;
-            font-size: 0.8rem;
-            padding: 2rem;
-        }
-    </style>
+/* MOBILE OPTIMIZATION */
+@media(max-width:768px){
+    .tilt-card{transform:none!important}
+}
+</style>
 </head>
 
 <body>
@@ -160,130 +169,13 @@
     <div class="container">
         <h1 class="logo">MVS</h1>
         <h2>Mars Veterinary Services</h2>
-        <p style="color:#ccc; max-width:700px; margin:auto;">
-            Professional veterinary care including adoption services,
-            permanent microchipping, and career opportunities.
+        <p style="color:#ccc;max-width:700px;margin:auto">
+            Compassionate veterinary care, safe microchipping, pet adoption,
+            and professional career opportunities.
         </p>
     </div>
 </header>
 
 <div class="container">
 
-    <!-- Adoption -->
-    <section>
-        <h3 class="section-title">Pets for Adoption</h3>
-        <div class="adoption-grid" id="card-container"></div>
-    </section>
-
-    <!-- Microchipping -->
-    <section>
-        <h3 class="section-title">Microchipping</h3>
-        <p style="color:#aaa; margin-bottom:2rem;">
-            Microchipping is a safe and permanent form of identification that helps reunite lost pets
-            with their owners. A tiny chip is placed under the skin and stores a unique ID number
-            linked to your contact details. It greatly improves recovery chances and provides lifelong peace of mind.
-        </p>
-
-        <div class="tech-panel">
-            <label>Pet Name</label>
-            <input type="text" placeholder="e.g. Luna">
-
-            <label>Select Option</label>
-            <div class="chip-options">
-                <label class="radio-wrapper"><input type="radio" name="chip" checked> Embedded Chip</label>
-                <label class="radio-wrapper"><input type="radio" name="chip"> External QR Biotag</label>
-                <label class="radio-wrapper"><input type="radio" name="chip"> Both</label>
-            </div>
-
-            <button class="btn-submit">Submit</button>
-        </div>
-    </section>
-
-    <!-- Careers / Job Application -->
-    <section>
-        <h3 class="section-title">Join Our Team</h3>
-
-        <div class="tech-panel">
-            <p style="color:#aaa; margin-bottom:2rem;">
-                We are always looking for passionate professionals who care deeply about animal welfare.
-                Fill in the form below to apply.
-            </p>
-
-            <form>
-                <label>Full Name</label>
-                <input type="text" placeholder="Your full name">
-
-                <label>Email Address</label>
-                <input type="email" placeholder="email@example.com">
-
-                <label>Phone Number</label>
-                <input type="text" placeholder="+254...">
-
-                <label>Position Applying For</label>
-                <select>
-                    <option>Veterinarian</option>
-                    <option>Veterinary Nurse</option>
-                    <option>Animal Handler</option>
-                    <option>Receptionist</option>
-                    <option>Intern</option>
-                </select>
-
-                <label>Upload CV</label>
-                <input type="file">
-
-                <label>Short Cover Message</label>
-                <textarea rows="4" placeholder="Tell us why you'd like to join Mars Veterinary Services"></textarea>
-
-                <button class="btn-submit">Submit Application</button>
-            </form>
-        </div>
-    </section>
-
-</div>
-
-<footer>© 2025 Mars Veterinary Services</footer>
-
-<script>
-    const pets = [
-        { id:'001', name:'Bella', type:'Dog', trait:'Friendly', img:'https://images.unsplash.com/photo-1558788353-f76d92427f16' },
-        { id:'002', name:'Luna', type:'Cat', trait:'Playful', img:'https://images.unsplash.com/photo-1518791841217-8f162f1e1131' },
-        { id:'003', name:'Charlie', type:'Rabbit', trait:'Calm', img:'https://images.unsplash.com/photo-1548767797-d8c844163c4c' },
-        { id:'004', name:'Max', type:'Dog', trait:'Loyal', img:'https://images.unsplash.com/photo-1517423440428-a5a00ad493e8' },
-        { id:'005', name:'Coco', type:'Parrot', trait:'Talkative', img:'https://images.unsplash.com/photo-1501706362039-c6e80948b3cf' },
-        { id:'006', name:'Rocky', type:'Hamster', trait:'Active', img:'https://images.unsplash.com/photo-1620912189865-93e9aefc9e3a' }
-    ];
-
-    const container = document.getElementById('card-container');
-
-    pets.forEach(pet => {
-        const card = document.createElement('div');
-        card.className = 'tilt-card';
-        card.style.background = `url(${pet.img}) center/cover no-repeat`;
-        card.innerHTML = `
-            <div class="card-content">
-                <div class="pet-id">ID: ${pet.id}</div>
-                <div class="pet-name">${pet.name}</div>
-                <div class="pet-stats">${pet.type} • ${pet.trait}</div>
-            </div>
-        `;
-        container.appendChild(card);
-    });
-
-    if (window.innerWidth > 768) {
-        document.querySelectorAll('.tilt-card').forEach(card => {
-            card.addEventListener('mousemove', e => {
-                const r = card.getBoundingClientRect();
-                const x = e.clientX - r.left;
-                const y = e.clientY - r.top;
-                card.style.transform =
-                    `rotateX(${-(y - r.height/2)/15}deg) rotateY(${(x - r.width/2)/15}deg)`;
-            });
-            card.addEventListener('mouseleave', () => {
-                card.style.transform = 'rotateX(0) rotateY(0)';
-            });
-        });
-    }
-</script>
-
-</body>
-</html>
+<!--
