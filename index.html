@@ -31,6 +31,7 @@
             font-family: 'Rajdhani', sans-serif;
             overflow-x: hidden;
             line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
         }
 
         h1, h2, h3 {
@@ -39,8 +40,9 @@
             letter-spacing: 2px;
         }
 
-        /* --- UI Components --- */
+        /* --- Layout & Typography --- */
         .container {
+            width: 100%;
             max-width: 1200px;
             margin: 0 auto;
             padding: 2rem;
@@ -52,7 +54,7 @@
         }
 
         .section-title {
-            font-size: 2.5rem;
+            font-size: clamp(1.8rem, 4vw, 2.5rem); /* Responsive font size */
             margin-bottom: 2rem;
             border-left: 5px solid var(--mars-red);
             padding-left: 1rem;
@@ -63,11 +65,11 @@
         header {
             text-align: center;
             padding: 4rem 1rem;
-            background: linear-gradient(180deg, rgba(11,12,16,0.9) 0%, transparent 100%);
+            background: linear-gradient(180deg, rgba(11,12,16,0.95) 0%, transparent 100%);
         }
 
         .logo {
-            font-size: 3rem;
+            font-size: clamp(2.5rem, 6vw, 3.5rem);
             color: var(--mars-red);
             margin-bottom: 1rem;
             display: inline-block;
@@ -77,16 +79,18 @@
         }
 
         .hero-text {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             max-width: 700px;
             margin: 0 auto;
             color: #ccc;
+            padding: 0 1rem;
         }
 
         /* --- 3D Tilt Cards (Adoption) --- */
         .adoption-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            /* Auto-fit with a smaller min-width for mobile compatibility */
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 2rem;
             perspective: 1000px;
         }
@@ -96,7 +100,7 @@
             border: 1px solid var(--glass-border);
             border-radius: 15px;
             padding: 2rem;
-            height: 350px;
+            min-height: 350px;
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
@@ -154,17 +158,23 @@
             transform: translateZ(10px);
         }
 
-        /* --- Forms --- */
+        /* --- Forms & Panels --- */
         .tech-panel {
             background: rgba(20, 20, 25, 0.8);
             border: 1px solid var(--neon-cyan);
-            padding: 3rem;
+            padding: clamp(1.5rem, 4vw, 3rem);
             border-radius: 10px;
             position: relative;
         }
 
         .form-group {
             margin-bottom: 1.5rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
         }
 
         label {
@@ -181,8 +191,9 @@
             border: 1px solid #333;
             color: #fff;
             font-family: 'Rajdhani', sans-serif;
-            font-size: 1.1rem;
+            font-size: 1rem;
             transition: all 0.3s ease;
+            border-radius: 4px;
         }
 
         input:focus, textarea:focus {
@@ -217,15 +228,16 @@
 
         .radio-wrapper input {
             margin-right: 1rem;
-            transform: scale(1.5);
+            transform: scale(1.4);
             accent-color: var(--mars-red);
+            min-width: 20px; /* Hit target fix */
         }
 
         .btn-submit {
             background: transparent;
             color: var(--neon-cyan);
             border: 2px solid var(--neon-cyan);
-            padding: 1rem 3rem;
+            padding: 1rem 2rem;
             font-family: 'Orbitron';
             font-size: 1rem;
             cursor: pointer;
@@ -234,6 +246,7 @@
             display: block;
             width: 100%;
             margin-top: 2rem;
+            border-radius: 4px;
         }
 
         .btn-submit:hover {
@@ -250,6 +263,26 @@
             font-size: 0.8rem;
         }
 
+        /* --- Mobile Responsive Tweaks --- */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr; /* Stack columns on mobile */
+                gap: 0;
+            }
+
+            .tilt-card {
+                min-height: 300px;
+            }
+
+            /* Disable 3D tilt interaction on touch devices to prevent scroll lag */
+            .tilt-card:hover {
+                transform: none !important;
+            }
+        }
     </style>
 </head>
 <body>
@@ -277,17 +310,17 @@
         <hr style="border-color: #333; margin-bottom: 6rem; opacity: 0.3;">
 
         <section id="microchipping">
-            <h3 class="section-title">Microchipping Services</h3>
+            <h3 class="section-title">Microchipping</h3>
             <div class="tech-panel">
                 <p style="margin-bottom: 2rem; color: #aaa;">
-                    Keep your pets safe and identifiable. Choose the identification method that works best for you.
+                    Keep your pets safe. Select an identification method:
                 </p>
 
                 <form id="chip-form">
                     <label>Pet Name</label>
                     <input type="text" placeholder="e.g. Max" style="margin-bottom: 2rem;">
 
-                    <label>Select Identification Type</label>
+                    <label>Select Option</label>
                     <div class="chip-options">
                         <label class="radio-wrapper">
                             <input type="radio" name="chip_type" value="embedded" checked>
@@ -303,7 +336,7 @@
                         </label>
                     </div>
 
-                    <button type="button" class="btn-submit" onclick="alert('Selection saved.')">Submit Selection</button>
+                    <button type="button" class="btn-submit" onclick="alert('Selection saved.')">Submit</button>
                 </form>
             </div>
         </section>
@@ -312,10 +345,10 @@
             <h3 class="section-title">Careers</h3>
             <div class="tech-panel" style="border-color: var(--mars-orange);">
                 <p style="margin-bottom: 2rem; color: #aaa;">
-                    Interested in working with us? Fill out the form below.
+                    Join our team.
                 </p>
                 <form id="career-form">
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div class="form-row">
                         <div class="form-group">
                             <label>Full Name</label>
                             <input type="text" placeholder="Your Name">
@@ -327,7 +360,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Position of Interest</label>
+                        <label>Position</label>
                         <select>
                             <option>Veterinarian</option>
                             <option>Vet Technician</option>
@@ -349,11 +382,11 @@
     </div>
 
     <footer>
-        <p>&copy; 2025 Mars Veterinary Services. All rights reserved.</p>
+        <p>&copy; 2025 Mars Veterinary Services.</p>
     </footer>
 
     <script>
-        // --- DATA: Adoption Pets (Simplified) ---
+        // --- DATA ---
         const pets = [
             { id: '001', name: 'Bella', type: 'Dog', trait: 'Friendly' },
             { id: '002', name: 'Luna', type: 'Cat', trait: 'Playful' },
@@ -363,7 +396,7 @@
             { id: '006', name: 'Rocky', type: 'Hamster', trait: 'Active' }
         ];
 
-        // --- RENDER: Generate Cards ---
+        // --- RENDER CARDS ---
         const container = document.getElementById('card-container');
         
         pets.forEach(pet => {
@@ -384,32 +417,31 @@
             container.appendChild(card);
         });
 
-        // --- INTERACTION: 3D Tilt Logic ---
-        const cards = document.querySelectorAll('.tilt-card');
+        // --- INTERACTION: 3D Tilt Logic (Desktop Only) ---
+        // We check window width to prevent script running heavily on mobile
+        if (window.matchMedia("(min-width: 769px)").matches) {
+            const cards = document.querySelectorAll('.tilt-card');
 
-        cards.forEach(card => {
-            card.addEventListener('mousemove', (e) => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                
-                // Calculate center
-                const centerX = rect.width / 2;
-                const centerY = rect.height / 2;
+            cards.forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
 
-                // Calculate rotation (max 15deg)
-                const rotateX = ((y - centerY) / centerY) * -15; // Invert Y for correct tilt
-                const rotateY = ((x - centerX) / centerX) * 15;
+                    const rotateX = ((y - centerY) / centerY) * -15; 
+                    const rotateY = ((x - centerX) / centerX) * 15;
 
-                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
+                });
+
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale(1)';
+                });
             });
-
-            // Reset on mouse leave
-            card.addEventListener('mouseleave', () => {
-                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale(1)';
-            });
-        });
-
+        }
     </script>
 </body>
 </html>
